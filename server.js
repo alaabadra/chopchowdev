@@ -39,8 +39,11 @@ app.get('/api/grocery', isAuthenticated);
 app.get('/hash', hashPassword);
 app.get('/api/logout',authunticationLogout)
 // Serve static files from the React app
-// app.use(express.static(path.join(__dirname, 'client/build')));
-app.use('*', express.static(path.join(__dirname,'/client', 'public', 'manifests.json')));
+if(NODE_ENV==='production'){
+
+    app.use(express.static(path.join(__dirname, 'client/build')));
+    // app.use('*', express.static(path.join(__dirname,'/client', 'public', 'manifests.json')));
+}
 
 app.get('/get_products', (req, res) => {
     console.log("Calling all Mongo products");
